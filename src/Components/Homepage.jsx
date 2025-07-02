@@ -18,6 +18,7 @@ import { cryptonames } from './cryptoNames';
 
 const Homepage = () => {
   const [coinData, setCoin] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
 
@@ -43,7 +44,8 @@ const Homepage = () => {
     
         const resp = await data.json();
         console.log(resp);
-        setCoin(resp)
+        setCoin(resp);
+        setLoading(false)
       } catch (error) {
         console.log("Error:", error)
       }
@@ -92,7 +94,7 @@ const Homepage = () => {
         <Button><Link to={'/crytoconverter'}>Convert Your crypto now</Link></Button>
       </div>
       <section className='grid grid-cols-1 sm:grid-cols-2 gap-10'>
-        {ele}
+       { loading ? "Loading your data..." : ele}
       </section>
     </div>
   )

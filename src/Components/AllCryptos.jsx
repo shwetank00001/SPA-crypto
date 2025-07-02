@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router";
 
-import { Button } from "@/Components/ui/button"
+
 import {
   Table,
   TableBody,
@@ -32,15 +32,14 @@ const AllCryptos = () => {
     showCoins()
   }, []);
 
-  // function navigateToUrl(nameParam){
-  //   nav(`/coin/${nameParam}`)
-  // onClick={() => navigateToUrl(item.symbol)}
-  // }
+  function navigateToUrl(nameParam){
+    nav(`/coin/${nameParam}`)
+
+  }
 
   const allCryptos = coin.map(function(item){
     return (
-              <TableRow >
-                {/* <TableCell>{item.rank}</TableCell> */}
+              <TableRow onClick ={() => navigateToUrl(item.symbol.toUpperCase())} >
                 <TableCell className="flex items-center gap-5"><img className="w-10" src={item.image}/> {item.name}</TableCell>
                 <TableCell>{item.current_price}</TableCell>
                 <TableCell>$ {(item.total_volume /1000000000).toFixed(3)} B</TableCell>
