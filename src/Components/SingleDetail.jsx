@@ -48,11 +48,11 @@ const SingleDetail = () => {
     console.log("website", singleCoin)
 
     return (
-        <div>
+        <div className="border-black p-5">
             {
                 isFetching ? "Loading Data.."
             :
-                <Card>
+                <Card >
                     <CardHeader>
                         <img src={singleCoin.png64} />
                         <h1 class="text-3xl font-bold underline"> {singleCoin.symbol} {singleCoin.name} </h1>
