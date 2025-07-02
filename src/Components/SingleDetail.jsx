@@ -21,27 +21,32 @@ const SingleDetail = () => {
 
 
     useEffect(() => {
-        async function showSingle(){
-            const data = await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
-                method: "POST",
-                headers: new Headers({
-                    "content-type": "application/json",
-                    "x-api-key": "195f3938-efaf-4db9-b9c0-2362702c22e2",
-                }),
-                body: JSON.stringify({
-                    code : `${name}`,
-                    currency: "USD",
-                    meta: true,
-                }),
-            });
-
-            const resp = await data.json();
-            console.log(resp);
-            setCoin(resp);
-            setFetching(false);
+        try {
+            async function showSingle(){
+                const data = await fetch(new Request("https://api.livecoinwatch.com/coins/single"), {
+                    method: "POST",
+                    headers: new Headers({
+                        "content-type": "application/json",
+                        "x-api-key": "195f3938-efaf-4db9-b9c0-2362702c22e2",
+                    }),
+                    body: JSON.stringify({
+                        code : `${name}`,
+                        currency: "USD",
+                        meta: true,
+                    }),
+                });
+    
+                const resp = await data.json();
+                console.log(resp);
+                setCoin(resp);
+                setFetching(false);
+            }
+            showSingle()
+        } catch (error) {
+            console.log("Error", error)
         }
 
-        showSingle()
+
         
     }, [])
     console.log("singleCoin", singleCoin)
@@ -59,7 +64,7 @@ const SingleDetail = () => {
                     </CardHeader>
                     <CardContent>
                         <h3>Alltime High: {singleCoin.allTimeHighUSD}</h3>
-                        <p>Total Volume: {singleCoin.volume}</p>
+                        <p>Total Volume: $ {singleCoin.volume / 1000000000} B</p>
                         <p>Total Supply: {singleCoin.totalSupply}</p>
                     </CardContent>
 

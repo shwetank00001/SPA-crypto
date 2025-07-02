@@ -50,41 +50,45 @@ const Homepage = () => {
     }
     showCoins();
   
-    const intervalId = setInterval(showCoins, 1000);
+    // const intervalId = setInterval(showCoins, 10000);
 
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, [])
 
 
 
   const ele = coinData.map(function(item){
     return (
-      <Card key={item.id} >
-        <CardHeader className="flex items-center gap-5">
-          <img src={item.png64}/>
-          <h3 className='text-3xl'>{item.code} <span> {item.symbol  }</span></h3>
-        </CardHeader>
-        <CardContent>
-          <p>Price: ${item.rate}</p>
-        </CardContent>
-        <CardContent>
-          <p >24H: <span className={item.delta.day > 0 ? "text-green-500": "text-red-500"}> {item.delta.day}</span></p>
-        </CardContent>
-        <CardContent>
-          <p >Last 7 days: <span className={item.delta.day > 0 ? "text-green-500": "text-red-500"}> {item.delta.week}</span></p>
-        </CardContent>
+      <div key={item.name}>
+        <Card key={item.id} >
+          <CardHeader className="flex items-center gap-5">
+            <img src={item.png64}/>
+            <h3 className='text-3xl'>{item.code} <span> {item.symbol  }</span></h3>
+          </CardHeader>
+          <CardContent>
+            <p>Price: ${item.rate.toFixed(3)}</p>
+          </CardContent>
+          <CardContent>
+            <p >24H: <span className={item.delta.day > 0 ? "text-green-500": "text-red-500"}> {item.delta.day}</span></p>
+          </CardContent>
+          <CardContent>
+            <p >Last 7 days: <span className={item.delta.day > 0 ? "text-green-500": "text-red-500"}> {item.delta.week}</span></p>
+          </CardContent>
 
-        <div className='flex  justify-center'>
-          <Button variant="secondary"><Link to={`/coin/${item.code}`}>Go to details</Link></Button> 
-        </div>
-      </Card>
+          <div className='flex  justify-center'>
+            <Button variant="secondary"><Link to={`/coin/${item.code}`}>Go to details</Link></Button> 
+          </div>
+        </Card>
+      </div>
     )
   })
 
   return (
     <div className='p-5'>
       <div className='flex justify-between'>
+      <Button><Link to={'/all'}>Click to see detailed table</Link></Button>
         <h3 className='text-3xl mb-10 font-semibold'>Welcome to my CRYPTO site!</h3> 
+
         <Button><Link to={'/crytoconverter'}>Convert Your crypto now</Link></Button>
       </div>
       <section className='grid grid-cols-1 sm:grid-cols-2 gap-10'>
