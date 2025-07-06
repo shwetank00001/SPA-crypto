@@ -9,7 +9,10 @@ import { ErrorBoundary, useErrorBoundary } from 'react-error-boundary'
 import React, {Suspense} from 'react'
 
 const LazyHomepage = React.lazy(() => import('./Components/Homepage'))
-const LazyAllCryptos = React.lazy(() => import('./Components/AllCryptos'))
+const LazyAllCryptos = React.lazy(() => import('./Components/AllCryptos'));
+
+import { ShimmerTable } from "react-shimmer-effects";
+
 
 function App() {
 
@@ -31,7 +34,7 @@ function App() {
         <Route path="/" element={<Suspense fallback={<h1>Please wait while we fetch you your data</h1>}><LazyHomepage /></Suspense>} />
         <Route path="/coin/:name" element={<ErrorBoundary fallbackRender={ShowError}><SingleDetail /></ErrorBoundary>} />
         <Route path="/crytoconverter" element={<CryptoConverter />} />
-        <Route path="/all" element={<Suspense fallback={<h1>Please wait while we fetch you your data</h1>}><LazyAllCryptos /></Suspense>} />
+        <Route path="/all" element={<Suspense fallback={<ShimmerTable row={10} col={1} /> }><LazyAllCryptos /></Suspense>} />
       </Routes>
     </>
   )
