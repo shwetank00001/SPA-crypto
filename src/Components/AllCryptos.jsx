@@ -53,11 +53,11 @@ const AllCryptos = () => {
   })
 
   return (
-    <div>
+    <div className="border-2 p-5 ">
       <Table>
         {/* <TableCaption>Every Crypto Here</TableCaption> */}
           <TableHeader>
-              <TableRow>
+              <TableRow className="text-lg border-2 bg-blue-100">
                 {/* <TableHead >ID</TableHead> */}
                 <TableHead >Coin</TableHead>
                 <TableHead>Price</TableHead>
